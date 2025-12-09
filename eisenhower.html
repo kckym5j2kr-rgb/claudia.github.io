@@ -164,35 +164,80 @@
     </div>
   </section>
 
-  <script>
-    document.querySelectorAll("form[data-target]").forEach(form => {
-      form.addEventListener("submit", event => {
-        event.preventDefault();
-        const targetId = form.getAttribute("data-target");
-        const ul = document.getElementById(targetId);
-        const input = form.querySelector("input[type='text']");
-        const text = input.value.trim();
-        if (!text) return;
+  const STORAGE_KEY = "claudia_eisenhower_matrix";
 
-        const li = document.createElement("li");
-        const span = document.createElement("span");
-        span.textContent = text;
-        span.className = "task-text";
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { q1: [], q2: [], q3: [], q4: [] };
+    const parsed = JSON.parse(raw);
+    return Object.assign({ q1: [], q2: [], q3: [], q4: [] }, parsed);
+  } catch (e) {
+    return { q1: [], q2: [], q3: [], q4: [] };
+  }
+}
 
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.textContent = "×";
-        btn.className = "remove";
-        btn.addEventListener("click", () => li.remove());
+function saveState(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error("Could not save Eisenhower matrix", e);
+  }
+}
 
-        li.appendChild(span);
-        li.appendChild(btn);
-        ul.appendChild(li);
+const state = loadState();
 
-        input.value = "";
-        input.focus();
-      });
+function renderList(id, items) {
+  const ul = document.getElementById(id);
+  ul.innerHTML = "";
+  items.forEach((text, index) => {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    span.textContent = text;
+    span.className = "task-text";
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "×";
+    btn.className = "remove";
+    btn.addEventListener("click", () => {
+      const key = id.replace("list-", "");
+      state[key].splice(index, 1);
+      saveState(state);
+      renderList(id, state[key]);
     });
+
+    li.appendChild(span);
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+}
+
+// pintar estado inicial
+renderList("list-q1", state.q1);
+renderList("list-q2", state.q2);
+renderList("list-q3", state.q3);
+renderList("list-q4", state.q4);
+
+// manejar formularios
+document.querySelectorAll("form[data-target]").forEach(form => {
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    const targetId = form.getAttribute("data-target"); // ej. "list-q1"
+    const key = targetId.replace("list-", "");          // ej. "q1"
+    const input = form.querySelector("input[type='text']");
+    const text = input.value.trim();
+    if (!text) return;
+
+    state[key].push(text);
+    saveState(state);
+    renderList(targetId, state[key]);
+
+    input.value = "";
+    input.focus();
+  });
+});
+
   </script>
 </body>
 </html>
