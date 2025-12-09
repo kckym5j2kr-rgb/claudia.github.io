@@ -13,6 +13,7 @@
       color: #111827;
       line-height: 1.5;
     }
+
     header {
       padding: 1.5rem 1.5rem 0.5rem;
       max-width: 960px;
@@ -22,6 +23,47 @@
     .subtitle { margin: 0 0 0.6rem; color: #4b5563; }
     a { color: #1d4ed8; text-decoration: underline; text-underline-offset: 2px; }
 
+    /* AI helper */
+    .ai-helper {
+      max-width: 960px;
+      margin: 0 auto 1.5rem;
+      padding: 0 1.5rem 1rem;
+    }
+    .ai-helper h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.2rem;
+    }
+    .ai-helper p {
+      margin: 0 0 0.6rem;
+      color: #4b5563;
+    }
+    #ai-input {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      font-family: inherit;
+      margin-bottom: 0.5rem;
+      resize: vertical;
+    }
+    #ai-button {
+      padding: 0.4rem 0.9rem;
+      border-radius: 0.5rem;
+      border: none;
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    #ai-button:hover { background: #020617; }
+    #ai-status {
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    /* Matrix layout */
     .matrix {
       max-width: 960px;
       margin: 1rem auto 2rem;
@@ -53,6 +95,7 @@
       letter-spacing: 0.06em;
       color: #6b7280;
     }
+
     form {
       display: flex;
       gap: 0.4rem;
@@ -65,7 +108,7 @@
       border: 1px solid #d1d5db;
       font-size: 0.9rem;
     }
-    button {
+    button.add-btn {
       padding: 0.35rem 0.7rem;
       border-radius: 0.5rem;
       border: none;
@@ -74,6 +117,7 @@
       background: #0f172a;
       color: white;
     }
+
     ul {
       list-style: none;
       padding-left: 0;
@@ -114,6 +158,16 @@
     </p>
   </header>
 
+  <!-- AI assistant area (frontend listo, API aún por conectar) -->
+  <section class="ai-helper">
+    <h2>AI assistant (optional)</h2>
+    <p>Paste a list of tasks (one per line) and, once the backend is configured, the AI will suggest a quadrant for each one. You can still edit the result manually.</p>
+    <textarea id="ai-input" rows="5" placeholder="Task 1&#10;Task 2&#10;Task 3"></textarea>
+    <button id="ai-button">Sort with AI</button>
+    <p id="ai-status"></p>
+  </section>
+
+  <!-- 2×2 matrix -->
   <section class="matrix">
     <div class="quad">
       <div class="quad-header">
@@ -122,7 +176,7 @@
       </div>
       <form data-target="list-q1">
         <input type="text" placeholder="Finish results section…" />
-        <button type="submit">Add</button>
+        <button type="submit" class="add-btn">Add</button>
       </form>
       <ul id="list-q1"></ul>
     </div>
@@ -134,7 +188,7 @@
       </div>
       <form data-target="list-q2">
         <input type="text" placeholder="Plan next experiment…" />
-        <button type="submit">Add</button>
+        <button type="submit" class="add-btn">Add</button>
       </form>
       <ul id="list-q2"></ul>
     </div>
@@ -146,7 +200,7 @@
       </div>
       <form data-target="list-q3">
         <input type="text" placeholder="Admin, formatting, emails…" />
-        <button type="submit">Add</button>
+        <button type="submit" class="add-btn">Add</button>
       </form>
       <ul id="list-q3"></ul>
     </div>
@@ -158,86 +212,125 @@
       </div>
       <form data-target="list-q4">
         <input type="text" placeholder="Distractions, low‑value tasks…" />
-        <button type="submit">Add</button>
+        <button type="submit" class="add-btn">Add</button>
       </form>
       <ul id="list-q4"></ul>
     </div>
   </section>
 
-  const STORAGE_KEY = "claudia_eisenhower_matrix";
+  <script>
+    // ===== Persistence with localStorage =====
+    const STORAGE_KEY = "claudia_eisenhower_matrix";
 
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { q1: [], q2: [], q3: [], q4: [] };
-    const parsed = JSON.parse(raw);
-    return Object.assign({ q1: [], q2: [], q3: [], q4: [] }, parsed);
-  } catch (e) {
-    return { q1: [], q2: [], q3: [], q4: [] };
-  }
-}
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { q1: [], q2: [], q3: [], q4: [] };
+        const parsed = JSON.parse(raw);
+        return Object.assign({ q1: [], q2: [], q3: [], q4: [] }, parsed);
+      } catch (e) {
+        return { q1: [], q2: [], q3: [], q4: [] };
+      }
+    }
 
-function saveState(state) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch (e) {
-    console.error("Could not save Eisenhower matrix", e);
-  }
-}
+    function saveState(state) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.error("Could not save Eisenhower matrix", e);
+      }
+    }
 
-const state = loadState();
+    const state = loadState();
 
-function renderList(id, items) {
-  const ul = document.getElementById(id);
-  ul.innerHTML = "";
-  items.forEach((text, index) => {
-    const li = document.createElement("li");
-    const span = document.createElement("span");
-    span.textContent = text;
-    span.className = "task-text";
+    function renderList(id, items) {
+      const ul = document.getElementById(id);
+      ul.innerHTML = "";
+      items.forEach((text, index) => {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        span.textContent = text;
+        span.className = "task-text";
 
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.textContent = "×";
-    btn.className = "remove";
-    btn.addEventListener("click", () => {
-      const key = id.replace("list-", "");
-      state[key].splice(index, 1);
-      saveState(state);
-      renderList(id, state[key]);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "×";
+        btn.className = "remove";
+        btn.addEventListener("click", () => {
+          const key = id.replace("list-", "");
+          state[key].splice(index, 1);
+          saveState(state);
+          renderList(id, state[key]);
+        });
+
+        li.appendChild(span);
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+    }
+
+    // initial render
+    renderList("list-q1", state.q1);
+    renderList("list-q2", state.q2);
+    renderList("list-q3", state.q3);
+    renderList("list-q4", state.q4);
+
+    // handle forms
+    document.querySelectorAll("form[data-target]").forEach(form => {
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        const targetId = form.getAttribute("data-target"); // e.g. "list-q1"
+        const key = targetId.replace("list-", "");          // e.g. "q1"
+        const input = form.querySelector("input[type='text']");
+        const text = input.value.trim();
+        if (!text) return;
+
+        state[key].push(text);
+        saveState(state);
+        renderList(targetId, state[key]);
+
+        input.value = "";
+        input.focus();
+      });
     });
 
-    li.appendChild(span);
-    li.appendChild(btn);
-    ul.appendChild(li);
-  });
-}
+    // ===== AI classification (backend to be added later) =====
+    const AI_ENDPOINT = "https://TU-BACKEND-URL/classify"; // cambia esto cuando tengas backend
 
-// pintar estado inicial
-renderList("list-q1", state.q1);
-renderList("list-q2", state.q2);
-renderList("list-q3", state.q3);
-renderList("list-q4", state.q4);
+    document.getElementById("ai-button").addEventListener("click", async () => {
+      const status = document.getElementById("ai-status");
+      const text = document.getElementById("ai-input").value.trim();
+      if (!text) {
+        status.textContent = "Write at least one task (one per line).";
+        return;
+      }
+      const tasks = text.split("\n").map(t => t.trim()).filter(Boolean);
+      status.textContent = "Asking AI…";
 
-// manejar formularios
-document.querySelectorAll("form[data-target]").forEach(form => {
-  form.addEventListener("submit", event => {
-    event.preventDefault();
-    const targetId = form.getAttribute("data-target"); // ej. "list-q1"
-    const key = targetId.replace("list-", "");          // ej. "q1"
-    const input = form.querySelector("input[type='text']");
-    const text = input.value.trim();
-    if (!text) return;
+      try {
+        const res = await fetch(AI_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tasks })
+        });
+        const data = await res.json(); // expected: { q1:[], q2:[], q3:[], q4:[] }
 
-    state[key].push(text);
-    saveState(state);
-    renderList(targetId, state[key]);
+        state.q1 = data.q1 || [];
+        state.q2 = data.q2 || [];
+        state.q3 = data.q3 || [];
+        state.q4 = data.q4 || [];
+        saveState(state);
+        renderList("list-q1", state.q1);
+        renderList("list-q2", state.q2);
+        renderList("list-q3", state.q3);
+        renderList("list-q4", state.q4);
 
-    input.value = "";
-    input.focus();
-  });
-});
-
+        status.textContent = "Tasks sorted. You can adjust them manually.";
+      } catch (e) {
+        console.error(e);
+        status.textContent = "AI request failed (backend not configured yet).";
+      }
+    });
   </script>
 </body>
 </html>
