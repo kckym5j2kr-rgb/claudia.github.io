@@ -3,9 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <title>Claudia Sánchez – Behavioral & Policy</title>
-<link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Base */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #111827;
+      background: #f9fafb;
+    }
 
-  
+    /* Header */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.2rem;
+    }
+    .subtitle {
+      margin: 0.25rem 0;
+      max-width: 44rem;
+      margin-left: auto;
+      margin-right: auto;
+      color: #4b5563;
+    }
+
+    /* Main layout */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+    .row {
+      margin-bottom: 2.5rem;
+    }
+    .row h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+    }
+
+    /* Grid of squares */
+    .row-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .square {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 150px;
+      border-radius: 1rem;
+      background: #a3be1b; /* verde tipo boceto */
+      text-decoration: none;
+      color: #111827;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+    .square:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.2);
+      background: #94b013;
+    }
+
+    /* Contact & footer */
+    #contact .section-intro {
+      margin: 0 0 1rem;
+      color: #4b5563;
+    }
+    a {
+      color: #1d4ed8;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+    }
+    a:hover { color: #1e40af; }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      padding: 1rem 1.5rem 1.5rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    @media (max-width: 800px) {
+      .row-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 550px) {
+      .row-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
 <body>
   <header>
     <div class="header-inner">
@@ -14,58 +117,61 @@
         Behavioral scientist & policy analyst using data, behavioral economics and AI to explore how people respond to policy, incentives and risk.
       </p>
       <p class="subtitle">
-        This space collects research, data projects and behavioral resources in a calm, readable format.
-      </p>
-      <div class="header-buttons">
-        <a href="research.html" class="btn-primary">Research & articles</a>
-        <a href="data-projects.html" class="btn-secondary">Data projects</a>
-      </div>
-      <p class="header-links">
-        <a href="behavioral-resources.html">Behavioral resources</a> ·
-        <a href="#contact">Contact</a>
+        Browse articles, data projects and behavioral resources below. Each square will become a project tile.
       </p>
     </div>
   </header>
 
-<main>
-  <section class="themes">
-    <article class="theme-card">
-      <a href="research.html">
-        <div class="thumb"></div>
-        <h2>Research & articles</h2>
-        <p>Working papers, thesis work and articles on behavioral and policy questions.</p>
-      </a>
-    </article>
+  <main>
+    <!-- Articles row -->
+    <section class="row">
+      <h2>Articles</h2>
+      <div class="row-grid">
+        <a class="square" href="#articles-1"><span>Article 1</span></a>
+        <a class="square" href="#articles-2"><span>Article 2</span></a>
+        <a class="square" href="#articles-3"><span>Article 3</span></a>
+        <a class="square" href="#articles-4"><span>Article 4</span></a>
+        <a class="square" href="#articles-5"><span>More soon</span></a>
+      </div>
+    </section>
 
-    <article class="theme-card">
-      <a href="data-projects.html">
-        <div class="thumb"></div>
-        <h2>Data projects</h2>
-        <p>Visualizations, simulations and interactive tools built with data.</p>
-      </a>
-    </article>
+    <!-- Data projects row -->
+    <section class="row">
+      <h2>Data projects</h2>
+      <div class="row-grid">
+        <a class="square" href="#data-1"><span>Data project 1</span></a>
+        <a class="square" href="#data-2"><span>Data project 2</span></a>
+        <a class="square" href="#data-3"><span>Data project 3</span></a>
+        <a class="square" href="#data-4"><span>Data project 4</span></a>
+        <a class="square" href="#data-5"><span>More soon</span></a>
+      </div>
+    </section>
 
-    <article class="theme-card">
-      <a href="behavioral-resources.html">
-        <div class="thumb"></div>
-        <h2>Behavioral resources</h2>
-        <p>Notes, templates and content experiments for applying behavioral science.</p>
-      </a>
-    </article>
-  </section>
+    <!-- Behavioral resources row -->
+    <section class="row">
+      <h2>Behavioral resources</h2>
+      <div class="row-grid">
+        <a class="square" href="#beh-1"><span>Template 1</span></a>
+        <a class="square" href="#beh-2"><span>Template 2</span></a>
+        <a class="square" href="#beh-3"><span>Guide 1</span></a>
+        <a class="square" href="#beh-4"><span>Content idea</span></a>
+        <a class="square" href="#beh-5"><span>More soon</span></a>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p class="section-intro">
-      If you’d like to collaborate or just talk about behavioral science and policy, feel free to reach out.
-    </p>
-    <p>
-      <a href="mailto:your@email.com">Email</a> ·
-      <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-    </p>
-  </section>
-</main>
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="section-intro">
+        If you’d like to collaborate or just talk about behavioral science and policy, feel free to reach out.
+      </p>
+      <p>
+        <a href="mailto:your@email.com">Email</a> ·
+        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </section>
+  </main>
 
   <footer>
     <p>© 2025 · Behavioral & Policy portfolio</p>
