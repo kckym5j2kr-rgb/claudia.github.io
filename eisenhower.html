@@ -23,10 +23,98 @@
     .subtitle { margin: 0 0 0.6rem; color: #4b5563; }
     a { color: #1d4ed8; text-decoration: underline; text-underline-offset: 2px; }
 
+    /* Inbox */
+    .inbox {
+      max-width: 960px;
+      margin: 0 auto 1.5rem;
+      padding: 0 1.5rem 0.5rem;
+      background: transparent;
+    }
+    .inbox h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+    }
+    .inbox p {
+      margin: 0 0 0.6rem;
+      color: #4b5563;
+    }
+    .inbox-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .inbox-form input[type="text"] {
+      flex: 1;
+      padding: 0.4rem 0.6rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+    }
+    .btn {
+      padding: 0.35rem 0.8rem;
+      border-radius: 0.5rem;
+      border: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #0f172a;
+      color: #ffffff;
+    }
+    .btn-primary:hover { background: #020617; }
+
+    .inbox-list {
+      background: #ffffff;
+      border-radius: 0.75rem;
+      padding: 0.7rem 0.8rem;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+    }
+    .inbox-list h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .inbox-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+    .inbox-item {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      padding: 0.25rem 0;
+      border-bottom: 1px dashed #e5e7eb;
+    }
+    .inbox-item:last-child { border-bottom: none; }
+    .inbox-text {
+      flex: 1 1 180px;
+    }
+    .inbox-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+    .tag-btn {
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .tag-btn:hover {
+      background: #e5e7eb;
+    }
+
     /* Matrix layout */
     .matrix {
       max-width: 960px;
-      margin: 1rem auto 2rem;
+      margin: 0 auto 2rem;
       padding: 0 1.5rem 2rem;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -56,12 +144,12 @@
       color: #6b7280;
     }
 
-    form {
+    form.quad-form {
       display: flex;
       gap: 0.4rem;
       margin: 0.35rem 0 0.6rem;
     }
-    input[type="text"] {
+    .quad-form input[type="text"] {
       flex: 1;
       padding: 0.35rem 0.5rem;
       border-radius: 0.5rem;
@@ -78,14 +166,14 @@
       color: white;
     }
 
-    ul {
+    ul.quad-list {
       list-style: none;
       padding-left: 0;
       margin: 0;
       font-size: 0.9rem;
       overflow-y: auto;
     }
-    li {
+    ul.quad-list li {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -93,7 +181,7 @@
       padding: 0.25rem 0;
       border-bottom: 1px dashed #e5e7eb;
     }
-    li:last-child { border-bottom: none; }
+    ul.quad-list li:last-child { border-bottom: none; }
     .task-text { flex: 1; }
     .remove {
       border: none;
@@ -106,6 +194,7 @@
 
     @media (max-width: 720px) {
       .matrix { grid-template-columns: 1fr; }
+      .inbox-item { align-items: flex-start; }
     }
   </style>
 </head>
@@ -118,6 +207,20 @@
     </p>
   </header>
 
+  <!-- Inbox / To-do list -->
+  <section class="inbox">
+    <h2>Inbox</h2>
+    <p>Dump everything here first. Then send each task to a quadrant: do now, schedule, delegate/automate or park.</p>
+    <form class="inbox-form" id="inbox-form">
+      <input type="text" id="inbox-input" placeholder="Type a task and press Add…" />
+      <button type="submit" class="btn btn-primary">Add to inbox</button>
+    </form>
+    <div class="inbox-list">
+      <h3>Unsorted tasks</h3>
+      <ul class="inbox-items" id="inbox-list"></ul>
+    </div>
+  </section>
+
   <!-- 2×2 matrix -->
   <section class="matrix">
     <div class="quad">
@@ -125,11 +228,11 @@
         <h2>Do now</h2>
         <span class="label">Urgent · Important</span>
       </div>
-      <form data-target="list-q1">
+      <form class="quad-form" data-target="list-q1">
         <input type="text" placeholder="Finish results section…" />
         <button type="submit" class="add-btn">Add</button>
       </form>
-      <ul id="list-q1"></ul>
+      <ul class="quad-list" id="list-q1"></ul>
     </div>
 
     <div class="quad">
@@ -137,11 +240,11 @@
         <h2>Schedule</h2>
         <span class="label">Not urgent · Important</span>
       </div>
-      <form data-target="list-q2">
+      <form class="quad-form" data-target="list-q2">
         <input type="text" placeholder="Plan next experiment…" />
         <button type="submit" class="add-btn">Add</button>
       </form>
-      <ul id="list-q2"></ul>
+      <ul class="quad-list" id="list-q2"></ul>
     </div>
 
     <div class="quad">
@@ -149,11 +252,11 @@
         <h2>Delegate / automate</h2>
         <span class="label">Urgent · Not important</span>
       </div>
-      <form data-target="list-q3">
+      <form class="quad-form" data-target="list-q3">
         <input type="text" placeholder="Admin, formatting, emails…" />
         <button type="submit" class="add-btn">Add</button>
       </form>
-      <ul id="list-q3"></ul>
+      <ul class="quad-list" id="list-q3"></ul>
     </div>
 
     <div class="quad">
@@ -161,25 +264,25 @@
         <h2>Eliminate / park</h2>
         <span class="label">Not urgent · Not important</span>
       </div>
-      <form data-target="list-q4">
+      <form class="quad-form" data-target="list-q4">
         <input type="text" placeholder="Distractions, low‑value tasks…" />
         <button type="submit" class="add-btn">Add</button>
       </form>
-      <ul id="list-q4"></ul>
+      <ul class="quad-list" id="list-q4"></ul>
     </div>
   </section>
 
   <script>
-    const STORAGE_KEY = "claudia_eisenhower_matrix";
+    const STORAGE_KEY = "claudia_eisenhower_matrix_v2";
 
     function loadState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return { q1: [], q2: [], q3: [], q4: [] };
+        if (!raw) return { inbox: [], q1: [], q2: [], q3: [], q4: [] };
         const parsed = JSON.parse(raw);
-        return Object.assign({ q1: [], q2: [], q3: [], q4: [] }, parsed);
+        return Object.assign({ inbox: [], q1: [], q2: [], q3: [], q4: [] }, parsed);
       } catch (e) {
-        return { q1: [], q2: [], q3: [], q4: [] };
+        return { inbox: [], q1: [], q2: [], q3: [], q4: [] };
       }
     }
 
@@ -193,7 +296,52 @@
 
     const state = loadState();
 
-    function renderList(id, items) {
+    // Render inbox
+    function renderInbox() {
+      const ul = document.getElementById("inbox-list");
+      ul.innerHTML = "";
+      state.inbox.forEach((text, index) => {
+        const li = document.createElement("li");
+        li.className = "inbox-item";
+
+        const span = document.createElement("span");
+        span.textContent = text;
+        span.className = "inbox-text";
+
+        const actions = document.createElement("div");
+        actions.className = "inbox-actions";
+
+        const map = [
+          ["Do now", "q1"],
+          ["Schedule", "q2"],
+          ["Delegate", "q3"],
+          ["Park", "q4"],
+        ];
+
+        map.forEach(([label, key]) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = label;
+          btn.className = "tag-btn";
+          btn.addEventListener("click", () => {
+            // move task from inbox to chosen quadrant
+            state.inbox.splice(index, 1);
+            state[key].push(text);
+            saveState(state);
+            renderInbox();
+            renderQuad("list-" + key, state[key]);
+          });
+          actions.appendChild(btn);
+        });
+
+        li.appendChild(span);
+        li.appendChild(actions);
+        ul.appendChild(li);
+      });
+    }
+
+    // Render a quadrant
+    function renderQuad(id, items) {
       const ul = document.getElementById(id);
       ul.innerHTML = "";
       items.forEach((text, index) => {
@@ -210,7 +358,7 @@
           const key = id.replace("list-", "");
           state[key].splice(index, 1);
           saveState(state);
-          renderList(id, state[key]);
+          renderQuad(id, state[key]);
         });
 
         li.appendChild(span);
@@ -219,25 +367,39 @@
       });
     }
 
-    // initial render
-    renderList("list-q1", state.q1);
-    renderList("list-q2", state.q2);
-    renderList("list-q3", state.q3);
-    renderList("list-q4", state.q4);
+    // Initial render
+    renderInbox();
+    renderQuad("list-q1", state.q1);
+    renderQuad("list-q2", state.q2);
+    renderQuad("list-q3", state.q3);
+    renderQuad("list-q4", state.q4);
 
-    // handle forms
-    document.querySelectorAll("form[data-target]").forEach(form => {
+    // Inbox form
+    document.getElementById("inbox-form").addEventListener("submit", event => {
+      event.preventDefault();
+      const input = document.getElementById("inbox-input");
+      const text = input.value.trim();
+      if (!text) return;
+      state.inbox.push(text);
+      saveState(state);
+      renderInbox();
+      input.value = "";
+      input.focus();
+    });
+
+    // Quadrant forms (manual add)
+    document.querySelectorAll("form.quad-form[data-target]").forEach(form => {
       form.addEventListener("submit", event => {
         event.preventDefault();
         const targetId = form.getAttribute("data-target"); // e.g. "list-q1"
-        const key = targetId.replace("list-", "");          // e.g. "q1"
+        const key = targetId.replace("list-", "");         // e.g. "q1"
         const input = form.querySelector("input[type='text']");
         const text = input.value.trim();
         if (!text) return;
 
         state[key].push(text);
         saveState(state);
-        renderList(targetId, state[key]);
+        renderQuad(targetId, state[key]);
 
         input.value = "";
         input.focus();
