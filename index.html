@@ -2,241 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Claudia Sánchez – Behavioral Science & Policy</title>
+  <title>Claudia Sánchez – Behavioral & Policy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #222;
-      background: #f7f7fb;
-    }
-    header {
-      padding: 3rem 1.5rem;
-      text-align: center;
-      background: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    header h1 {
-      margin-bottom: 0.5rem;
-      font-size: 2rem;
-    }
-    header p {
-      max-width: 640px;
-      margin: 0.25rem auto;
-    }
-    .buttons {
-      margin-top: 1.5rem;
-    }
-    .buttons a {
-      display: inline-block;
-      margin: 0 0.5rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-    .btn-primary {
-      background: #111827;
-      color: #ffffff;
-    }
-    .btn-secondary {
-      border: 1px solid #111827;
-      color: #111827;
-      background: #ffffff;
-    }
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 3rem;
-    }
-    section {
-      margin-bottom: 2.5rem;
-    }
-    h2 {
-      margin-bottom: 0.75rem;
-      font-size: 1.35rem;
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: #ffffff;
-      border-radius: 0.75rem;
-      padding: 1.25rem 1.4rem;
-      box-shadow: 0 4px 16px rgba(15,23,42,0.06);
-    }
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 0.4rem;
-      font-size: 1.05rem;
-    }
-    .tags {
-      margin-top: 0.4rem;
-      margin-bottom: 0.6rem;
-      font-size: 0.8rem;
-      color: #4b5563;
-    }
-    .tags span {
-      display: inline-block;
-      margin-right: 0.4rem;
-      margin-bottom: 0.25rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      background: #eef2ff;
-    }
-    a {
-      color: #2563eb;
-    }
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.85rem;
-      color: #6b7280;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Claudia Sánchez</h1>
-    <p><strong>Behavioral scientist & policy analyst</strong> using data, behavioral economics and AI to design evidence‑based public policy and learning tools.</p>
-    <p>Currently working on tourism taxation perceptions, vaccine hesitancy, and interactive data‑driven projects.</p>
-    <div class="buttons">
-      <a href="#projects" class="btn-primary">View projects</a>
-      <a href="#about" class="btn-secondary">About & contact</a>
+    <div class="header-inner">
+      <h1>Claudia Sánchez</h1>
+      <p class="subtitle">
+        Behavioral scientist & policy analyst using data, behavioral economics and AI to explore how people respond to policy, incentives and risk.
+      </p>
+      <p class="subtitle">
+        This space collects research, data projects and behavioral resources in a calm, readable format.
+      </p>
+      <div class="header-buttons">
+        <a href="#research" class="btn-primary">Research & articles</a>
+        <a href="#data-projects" class="btn-secondary">Data projects</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <section id="projects">
-      <h2>Selected projects</h2>
-      <div class="projects-grid">
-        <article class="card">
-          <h3>Tourism tax perceptions in Costa del Sol</h3>
-          <p>Mixed‑methods study on how residents and visitors perceive tourism taxation and how framing affects policy support.</p>
-          <div class="tags">
-            <span>Behavioral economics</span><span>Policy analysis</span><span>Survey & data viz</span>
-          </div>
-          <!-- Link to repo or PDF when ready -->
-        </article>
+    <!-- Research & Articles -->
+    <section id="research">
+      <h2>Research & articles</h2>
+      <p class="section-intro">
+        Longer-form work exploring how people respond to policy, incentives and uncertainty.
+      </p>
 
-        <article class="card">
-          <h3>Vaccine hesitancy & behavioral nudges</h3>
-          <p>Research on psychological barriers to vaccination and low‑cost nudges to increase uptake in public health campaigns.</p>
-          <div class="tags">
-            <span>Public health</span><span>Nudging</span><span>Experiment design</span>
-          </div>
-        </article>
+      <article class="list-item">
+        <h3>Tourism tax perceptions in Costa del Sol</h3>
+        <p>
+          Mixed-methods project on how residents and visitors perceive tourism taxes, and how different framings influence support.
+        </p>
+        <p class="meta">Behavioral economics · Policy research · Surveys</p>
+      </article>
 
-        <article class="card">
-          <h3>AI‑powered Eisenhower matrix</h3>
-          <p>Personal productivity tool that classifies tasks by urgency/importance and suggests time‑blocks and behavioral prompts.</p>
-          <div class="tags">
-            <span>AI</span><span>Time management</span><span>Behavioral design</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Interactive data visualizations in Python</h3>
-          <p>Collection of dashboards and visual narratives built with Python to communicate policy and behavioral insights.</p>
-          <div class="tags">
-            <span>Python</span><span>Data visualization</span><span>Storytelling</span>
-          </div>
-        </article>
-      </div>
+      <article class="list-item">
+        <h3>Vaccine hesitancy & behavioral nudges</h3>
+        <p>
+          Research on psychological barriers to vaccination and low-cost nudges that can support public health campaigns.
+        </p>
+        <p class="meta">Public health · Nudging · Experiments</p>
+      </article>
     </section>
 
-    <section id="about">
-      <h2>About & contact</h2>
-      <p>I have a background in health and public policy and a master’s in policy analysis with a focus on behavioral science. I enjoy turning complex datasets into clear stories and designing interventions that actually change behavior.</p>
-      <p>Key skills: mixed‑methods research, behavioral experiment design, Python (pandas, data viz), survey design, and evidence‑based policy analysis.</p>
+    <!-- Data projects -->
+    <section id="data-projects">
+      <h2>Data projects</h2>
+      <p class="section-intro">
+        Visual and interactive pieces that turn datasets into clear stories.
+      </p>
+
+      <article class="list-item">
+        <h3>Interactive data visualizations in Python</h3>
+        <p>
+          A growing set of charts and dashboards highlighting behavioral and policy patterns.
+        </p>
+        <p class="meta">Python · Data visualization · Storytelling</p>
+      </article>
+
+      <article class="list-item">
+        <h3>Behavioral simulations & experiments</h3>
+        <p>
+          Notebooks that simulate decision-making under risk, policy scenarios and small behavioral experiments.
+        </p>
+        <p class="meta">Simulation · Prototyping · Teaching</p>
+      </article>
+    </section>
+
+    <!-- Behavioral resources -->
+    <section id="behavioral-resources">
+      <h2>Behavioral resources</h2>
+      <p class="section-intro">
+        Short, practical pieces for people who want to apply behavioral science in policy and everyday projects.
+      </p>
+
+      <article class="list-item">
+        <h3>Behavioral notes for policymakers</h3>
+        <p>
+          Small explainers on framing, defaults and social norms in plain language.
+        </p>
+        <p class="meta">Applied behavioral science · Policy</p>
+      </article>
+
+      <article class="list-item">
+        <h3>Content & social media experiments</h3>
+        <p>
+          Threads and posts testing how different framings change engagement with behavioral topics.
+        </p>
+        <p class="meta">Social media · Experiments · Communication</p>
+      </article>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="section-intro">
+        If you’d like to collaborate or just talk about behavioral science and policy, feel free to reach out.
+      </p>
       <p>
-        Contact: 
-        <a href="mailto:claudia@email.com">claudia@email.com</a> ·
-        <a href="https://github.com/kckym5j2kr-rgb" target="_blank">GitHub</a> ·
-        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+        <a href="mailto:your@email.com">Email</a> ·
+        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
       </p>
     </section>
   </main>
 
-  <main>
-  <!-- Research & Articles -->
-  <section id="research">
-    <h2>Research & articles</h2>
-    <p>I explore how people respond to policy, incentives, and risk, using experiments, surveys, and mixed-methods research.</p>
-    <div class="projects-grid">
-      <article class="card">
-        <h3>Tourism tax perceptions in Costa del Sol</h3>
-        <p>Study on how residents and visitors perceive tourism taxation, and how different framings influence policy support.</p>
-        <div class="tags">
-          <span>Behavioral economics</span><span>Policy research</span><span>Survey methods</span>
-        </div>
-        <!-- Link to PDF/preprint when ready -->
-      </article>
-
-      <article class="card">
-        <h3>Vaccine hesitancy & behavioral nudges</h3>
-        <p>Research into psychological barriers to vaccination and low-cost nudges to support public health decision-making.</p>
-        <div class="tags">
-          <span>Public health</span><span>Nudging</span><span>Experiment design</span>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Data & Interactive Projects -->
-  <section id="data-projects">
-    <h2>Data & interactive projects</h2>
-    <p>Data visualizations and interactive tools that turn complex findings into clear, actionable stories.</p>
-    <div class="projects-grid">
-      <article class="card">
-        <h3>Interactive data visualizations in Python</h3>
-        <p>A growing collection of charts and dashboards communicating behavioral and policy insights.</p>
-        <div class="tags">
-          <span>Python</span><span>Data visualization</span><span>Storytelling</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Behavioral simulations & experiments</h3>
-        <p>Notebooks and prototypes that simulate decision-making, choices under risk, and policy scenarios.</p>
-        <div class="tags">
-          <span>Simulation</span><span>Experiments</span><span>Prototyping</span>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Social Media & Content -->
-  <section id="content-projects">
-    <h2>Social media & content projects</h2>
-    <p>Short-form content experiments that translate behavioral science and policy insights for wider audiences.</p>
-    <div class="projects-grid">
-      <article class="card">
-        <h3>Behavioral science LinkedIn series</h3>
-        <p>Posts that break down behavioral concepts with real-world policy and health examples.</p>
-        <div class="tags">
-          <span>Social media</span><span>Education</span><span>Nudging</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Data storytelling threads</h3>
-        <p>Threads that walk through datasets step by step, highlighting key behavioral patterns and anomalies.</p>
-        <div class="tags">
-          <span>Data storytelling</span><span>Engagement</span><span>Visual explanations</span>
-        </div>
-      </article>
-    </div>
-  </section>
-</main>
-
   <footer>
-    © 2025 · Claudia Sánchez
+    <p>© 2025 · Behavioral & Policy portfolio</p>
   </footer>
 </body>
 </html>
+
