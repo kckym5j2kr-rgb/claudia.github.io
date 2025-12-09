@@ -2,53 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Claudia Sánchez – Behavioral Science & Policy</title>
+  <title>Claudia Sánchez – Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
-      color: #222;
-      background: #f7f7fb;
+      color: #111827;
+      background: #f9fafb;
     }
+
     header {
-      padding: 3rem 1.5rem;
-      text-align: center;
       background: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
     }
     header h1 {
-      margin-bottom: 0.5rem;
-      font-size: 2rem;
+      margin: 0 0 0.5rem;
+      font-size: 2.2rem;
     }
-    header p {
-      max-width: 640px;
-      margin: 0.25rem auto;
+    .subtitle {
+      margin: 0.25rem 0;
+      max-width: 44rem;
+      margin-left: auto;
+      margin-right: auto;
+      color: #4b5563;
     }
-    .buttons {
-      margin-top: 1.5rem;
-    }
-    .buttons a {
-      display: inline-block;
-      margin: 0 0.5rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-    .btn-primary {
-      background: #111827;
-      color: #ffffff;
-    }
-    .btn-secondary {
-      border: 1px solid #111827;
-      color: #111827;
-      background: #ffffff;
-    }
+
     main {
-      max-width: 960px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 2rem 1.5rem 3rem;
     }
@@ -56,45 +45,45 @@
       margin-bottom: 2.5rem;
     }
     h2 {
-      margin-bottom: 0.75rem;
-      font-size: 1.35rem;
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
     }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: #ffffff;
-      border-radius: 0.75rem;
-      padding: 1.25rem 1.4rem;
-      box-shadow: 0 4px 16px rgba(15,23,42,0.06);
-    }
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 0.4rem;
-      font-size: 1.05rem;
-    }
-    .tags {
-      margin-top: 0.4rem;
-      margin-bottom: 0.6rem;
-      font-size: 0.8rem;
+    .section-intro {
+      margin: 0 0 1rem;
       color: #4b5563;
     }
-    .tags span {
-      display: inline-block;
-      margin-right: 0.4rem;
-      margin-bottom: 0.25rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      background: #eef2ff;
+
+    .list-item {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e5e7eb;
     }
+    .list-item:last-of-type {
+      border-bottom: none;
+    }
+    .list-item h3 {
+      margin: 0 0 0.15rem;
+      font-size: 1.05rem;
+    }
+    .list-item p {
+      margin: 0.1rem 0;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
     a {
-      color: #2563eb;
+      color: #1d4ed8;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
     }
+    a:hover { color: #1e40af; }
+
     footer {
+      border-top: 1px solid #e5e7eb;
       text-align: center;
-      padding: 1.5rem;
+      padding: 1rem 1.5rem 1.5rem;
       font-size: 0.85rem;
       color: #6b7280;
     }
@@ -102,69 +91,84 @@
 </head>
 <body>
   <header>
-    <h1>Claudia Sánchez</h1>
-    <p><strong>Behavioral scientist & policy analyst</strong> using data, behavioral economics and AI to design evidence‑based public policy and learning tools.</p>
-    <p>Currently working on tourism taxation perceptions, vaccine hesitancy, and interactive data‑driven projects.</p>
-    <div class="buttons">
-      <a href="#projects" class="btn-primary">View projects</a>
-      <a href="#about" class="btn-secondary">About & contact</a>
+    <div class="header-inner">
+      <h1>Claudia Sánchez</h1>
+      <p class="subtitle">
+        Behavioral scientist & policy analyst using data, behavioral economics and AI to explore how people respond to policy, incentives and risk.
+      </p>
+      <p class="subtitle">
+        This is a simple profile page with space for research, data projects and behavioral resources.
+      </p>
     </div>
   </header>
 
   <main>
-    <section id="projects">
-      <h2>Selected projects</h2>
-      <div class="projects-grid">
-        <article class="card">
-          <h3>Tourism tax perceptions in Costa del Sol</h3>
-          <p>Mixed‑methods study on how residents and visitors perceive tourism taxation and how framing affects policy support.</p>
-          <div class="tags">
-            <span>Behavioral economics</span><span>Policy analysis</span><span>Survey & data viz</span>
-          </div>
-          <!-- Link to repo or PDF when ready -->
-        </article>
+    <section id="research">
+      <h2>Research & articles</h2>
+      <p class="section-intro">Working papers, thesis work and articles on behavioral and policy questions.</p>
 
-        <article class="card">
-          <h3>Vaccine hesitancy & behavioral nudges</h3>
-          <p>Research on psychological barriers to vaccination and low‑cost nudges to increase uptake in public health campaigns.</p>
-          <div class="tags">
-            <span>Public health</span><span>Nudging</span><span>Experiment design</span>
-          </div>
-        </article>
+      <article class="list-item">
+        <h3>Tourism tax perceptions in Costa del Sol</h3>
+        <p>Mixed-methods project on how residents and visitors perceive tourism taxes, and how framing influences support.</p>
+        <p class="meta">Behavioral economics · Policy research · Surveys</p>
+      </article>
 
-        <article class="card">
-          <h3>AI‑powered Eisenhower matrix</h3>
-          <p>Personal productivity tool that classifies tasks by urgency/importance and suggests time‑blocks and behavioral prompts.</p>
-          <div class="tags">
-            <span>AI</span><span>Time management</span><span>Behavioral design</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Interactive data visualizations in Python</h3>
-          <p>Collection of dashboards and visual narratives built with Python to communicate policy and behavioral insights.</p>
-          <div class="tags">
-            <span>Python</span><span>Data visualization</span><span>Storytelling</span>
-          </div>
-        </article>
-      </div>
+      <article class="list-item">
+        <h3>Vaccine hesitancy & behavioral nudges</h3>
+        <p>Research on psychological barriers to vaccination and low-cost nudges that can support public health campaigns.</p>
+        <p class="meta">Public health · Nudging · Experiments</p>
+      </article>
     </section>
 
-    <section id="about">
-      <h2>About & contact</h2>
-      <p>I have a background in health and public policy and a master’s in policy analysis with a focus on behavioral science. I enjoy turning complex datasets into clear stories and designing interventions that actually change behavior.</p>
-      <p>Key skills: mixed‑methods research, behavioral experiment design, Python (pandas, data viz), survey design, and evidence‑based policy analysis.</p>
+    <section id="data-projects">
+      <h2>Data projects</h2>
+      <p class="section-intro">Visualizations and interactive pieces that turn datasets into clear stories.</p>
+
+      <article class="list-item">
+        <h3>Interactive data visualizations in Python</h3>
+        <p>Charts and dashboards highlighting behavioral and policy patterns.</p>
+        <p class="meta">Python · Data visualization · Storytelling</p>
+      </article>
+
+      <article class="list-item">
+        <h3>Behavioral simulations & experiments</h3>
+        <p>Notebooks that simulate decisions under risk and policy scenarios.</p>
+        <p class="meta">Simulation · Prototyping</p>
+      </article>
+    </section>
+
+    <section id="behavioral-resources">
+      <h2>Behavioral resources</h2>
+      <p class="section-intro">Short, practical pieces for applying behavioral science.</p>
+
+      <article class="list-item">
+        <h3>Behavioral notes for policymakers</h3>
+        <p>Small explainers on framing, defaults and social norms.</p>
+        <p class="meta">Applied behavioral science · Policy</p>
+      </article>
+
+      <article class="list-item">
+        <h3>Eisenhower matrix (coming soon)</h3>
+        <p>A simple tool to sort tasks by urgency and importance.</p>
+        <p class="meta">Productivity · Time management</p>
+      </article>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="section-intro">
+        If you’d like to collaborate or just talk about behavioral science and policy, feel free to reach out.
+      </p>
       <p>
-        Contact: 
-        <a href="mailto:claudia@email.com">claudia@email.com</a> ·
-        <a href="https://github.com/kckym5j2kr-rgb" target="_blank">GitHub</a> ·
-        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+        <a href="mailto:your@email.com">Email</a> ·
+        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
       </p>
     </section>
   </main>
 
   <footer>
-    © 2025 · Claudia Sánchez
+    <p>© 2025 · Behavioral & Policy portfolio</p>
   </footer>
 </body>
 </html>
